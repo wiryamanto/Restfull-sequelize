@@ -57,5 +57,47 @@ module.exports = {
                         });
                     });
             })
+    }, 
+    updateFoods: (req, res)=>{
+        let {id} = req.params;
+        let {body} = req
+        foods.update (body, {
+            where:{
+                id:id
+            }
+        }).then((data)=>{
+            res.status(200).send({
+                msg:"succes Update Foods",
+                status:200,
+                data
+            })
+        }).catch((err)=>{
+            res.status(500).send({
+                msg: "Failed Update Foods",
+                status:500,
+                err,
+            })
+        })
     },
+    deleteFood:(req,res)=>{
+        let {id}= req.params;
+        foods.destroy({
+            where:{
+                id:id
+            }
+        }).then((data)=>{
+            res.status(200).send({
+                msg: "Success Delete Foods",
+                status:200,
+                data
+            })
+        }).catch((err)=>{
+            res.status(500).send({
+                msg: "Failed Delete Foods",
+                status:500,
+                err
+            })
+        })
+    }
+
 };
